@@ -1,14 +1,20 @@
 <template>
     <n-layout has-sider
               class="page-template">
-        <n-layout-sider :collapsed-width="44"
-                        :width="180"
-                        show-trigger
-                        bordered>
-            <n-menu :options="menuOptions"
-                    :collapsed-width="64"
-                    :value="activeKey"
-                    @update:value="onActiveChange" />
+        <n-layout-sider 
+            collapse-mode="width"
+            :collapsed-width="44"
+            :width="160"
+            show-trigger
+            bordered
+        >
+            <n-menu
+                :options="menuOptions"
+                :collapsed-width="44"
+                :collapsed-icon-size="22"
+                :value="activeKey"
+                @update:value="onActiveChange" 
+            />
         </n-layout-sider>
         <n-layout class="page-template__content">
             <router-view />
@@ -48,6 +54,6 @@ export default defineComponent({
     }
 
     .page-template__content {
-        padding: 10px 16px;
+        padding: 10px 26px;
     }
 </style>

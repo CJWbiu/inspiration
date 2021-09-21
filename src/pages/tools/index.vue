@@ -8,7 +8,7 @@
  * @file 列表页
  */
 
-import { defineComponent } from 'vue';
+import { defineComponent, VNodeChild } from 'vue';
 import { TOOLS_CHILDREN } from '@/router/modules/tools';
 import PageTemplate from '../template.vue';
 import { MenuOption } from 'naive-ui';
@@ -17,7 +17,8 @@ function getMenuOptions (): MenuOption[] {
 	let options = TOOLS_CHILDREN.map(route => {
 			return {
 				label: (route.meta?.title || '') as string,
-				key: route.name as string
+				key: route.name as string,
+                icon: (route.meta?.icon || null) as () => VNodeChild
 			};
 		});
 	
