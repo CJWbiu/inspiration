@@ -1,4 +1,5 @@
 import { RouteRecordRaw } from 'vue-router';
+import { TOOLS_CHILDREN } from './modules/tools';
 import Tools from 'pages/tools/index.vue';
 import CssPractice from 'pages/css-practice/index.vue';
 
@@ -14,7 +15,9 @@ const ROUTES: RouteRecordRaw[] = [
         meta: {
             title: "工具库"
         },
-        component: Tools
+        component: Tools,
+        redirect: '/tools/binary',
+        children: TOOLS_CHILDREN
     },
     {
         path: '/css',
