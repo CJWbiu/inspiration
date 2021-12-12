@@ -9,6 +9,9 @@
 						mode="horizontal"
 						:value="activeKey"
 						@update:value="onActiveChange" />
+				<section class="app-main__btns">
+					<n-button size="large" quaternary @click="changeTheme">{{ themeText }}</n-button>
+				</section>
 			</n-space>
 		</n-layout-header>
 		<n-layout class="app-main__content">
@@ -23,11 +26,12 @@
  * @file 入口内容
  */
 
-import { defineComponent, onMounted, VNodeChild } from 'vue';
+import { defineComponent, computed, onMounted, VNodeChild } from 'vue';
 import { useLoadingBar, MenuOption } from 'naive-ui'
 import { setLoadingBar } from './router';
 import { ROUTES } from './router/routers';
 import { initMenuActive } from '@/utils/menu';
+import useTheme from '@/hooks/use-theme';
 
 function initLoadingBar () {
 	const loadingBar = useLoadingBar();
@@ -54,11 +58,20 @@ function getMenuOptions (): MenuOption[] {
 export default defineComponent({
     name: 'App',
 	setup () {
+		const { setTheme, theme } = useTheme();
 		initLoadingBar();
 		let menuOptions = getMenuOptions();
+		const changeTheme = () => {
+			setTheme(theme.value === 'dark' ? 'light' : 'dark');
+		};
+		const themeText = computed(() => {
+			return theme.value === 'dark' ? '深色' : '浅色';
+		});
 
 		return {
 			menuOptions,
+			changeTheme,
+			themeText,
 			...initMenuActive(menuOptions)
 		};
 	}
@@ -72,5 +85,10 @@ export default defineComponent({
 
 	.app-main__header {
 		padding: 6px 12px;
+	}
+
+	.app-main__btns {
+		display: flex;
+		align-items: center;
 	}
 </style>
